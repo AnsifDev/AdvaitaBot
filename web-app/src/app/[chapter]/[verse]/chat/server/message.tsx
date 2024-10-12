@@ -1,5 +1,4 @@
-import ChatBotPrompt from "@/app/actions"
-import React, { Suspense } from "react"
+import React from "react"
 
 export function PromptResponseSkel() {
     return (

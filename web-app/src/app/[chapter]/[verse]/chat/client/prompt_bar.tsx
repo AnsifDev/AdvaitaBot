@@ -3,11 +3,10 @@
 import { useState } from "react"
 
 type PromptBarParams = {
-    className?: string,
     onPrompt?: (string: string) => void
 }
 
-export default function PromptBar({ className, onPrompt }: PromptBarParams) {
+export default function PromptBar({ onPrompt }: PromptBarParams) {
     const [prompt, setPrompt] = useState("");
 
     function sendPrompt() {

@@ -1,9 +1,9 @@
 "use client"
 
-import { ReactNode, Suspense, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Message, PromptResponseSkel } from "../server/message"
 import PromptBar from "./prompt_bar"
-import ChatBotPrompt from "@/app/actions";
+import { ChatBotPrompt } from "@/app/actions";
 
 export default function ChatClient() {
     const [chats, updateChats] = useState<Array<string>>([]);
@@ -17,7 +17,7 @@ export default function ChatClient() {
     return (
         <div className="flex flex-col flex-1">
             <div className="flex-1 flex flex-col gap-2 px-4 items-stretch self-center w-full max-w-[720px]">
-                {chats.map((v, i) => <Message msg={v} asPrompt={i%2 == 0}/>)}
+                {chats.map((v, i) => <Message key={i} msg={v} asPrompt={i%2 == 0}/>)}
                 <div hidden={!loading}><PromptResponseSkel/></div>
                 <div className="" ref={messagesEndRef}/>
             </div>

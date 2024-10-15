@@ -3,12 +3,12 @@
 import { Quote } from "@/components/types"
 import { setTimeout } from "timers/promises"
 
-export async function ChatBotPrompt(prompt: string) {
+export async function makePrompt(prompt: string) {
     await setTimeout(3000)
     return `Response for the prompt: "${prompt}"`
 }
 
-export async function FetchQuote(chapter: number, verse: number): Promise<Quote> {
+export async function fetchQuote(chapter: number, verse: number): Promise<Quote> {
     await setTimeout(3000)
     return {
         chapter: chapter,

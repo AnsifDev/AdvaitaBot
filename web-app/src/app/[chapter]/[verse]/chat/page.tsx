@@ -1,5 +1,5 @@
 import ChatClient from "./client/chat_client";
-import { FetchQuote } from "@/app/actions";
+import { fetchQuote } from "@/ports";
 import { Suspense } from "react";
 
 type PageParams = {
@@ -19,7 +19,7 @@ function QuoteSkel() {
 }
 
 async function Quotes({ chapter, verse }: { chapter: number, verse: number }) {
-  const quote = await FetchQuote(chapter, verse);
+  const quote = await fetchQuote(chapter, verse);
   return (
       <div className="flex flex-col sm:flex-row md:flex-col h-min items-stretch gap-2 p-4 font-normal overflow-auto">
           <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote.quote}</div>

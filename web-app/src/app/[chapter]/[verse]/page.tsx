@@ -1,4 +1,4 @@
-import { FetchQuote } from "@/app/actions"
+import { fetchQuote } from "@/ports"
 import Link from "next/link"
 import { Suspense } from "react";
 
@@ -19,7 +19,7 @@ function QuoteSkel() {
 }
 
 async function Quotes({ chapter, verse }: { chapter: number, verse: number }) {
-    const quote = await FetchQuote(chapter, verse);
+    const quote = await fetchQuote(chapter, verse);
     return (
         <div className="flex flex-col md:flex-row h-min items-stretch gap-2 p-4 font-normal overflow-auto container">
             <div className="rounded flex-none md:flex-1 bg-white/10 py-2 px-4 text-center">{quote.quote}</div>

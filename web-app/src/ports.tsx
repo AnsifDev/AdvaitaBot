@@ -8,7 +8,7 @@ export async function makePrompt(prompt: string) {
     return `Response for the prompt: "${prompt}"`
 }
 
-import { Filter, MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 export async function getChapterIndex(): Promise<ChapterIndex[]> {
     const agg = [
@@ -39,7 +39,7 @@ export async function getChapterIndex(): Promise<ChapterIndex[]> {
 export async function fetchQuote(chapter: number, verse: number, withCommentary = true): Promise<Quote | null> {
     const filter = { _id: `${chapter}.${verse}` };
     const projection = {
-        'commentary': 1, 
+        'commentary': withCommentary? 1: 0, 
         'translation': 1, 
         'quote': 1, 
         'chapter': 1, 

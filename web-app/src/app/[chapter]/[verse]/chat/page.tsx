@@ -19,11 +19,11 @@ function QuoteSkel() {
 }
 
 async function Quotes({ chapter, verse }: { chapter: number, verse: number }) {
-  const quote = await fetchQuote(chapter, verse);
+  const quote = await fetchQuote(chapter, verse, false);
   return (
       <div className="flex flex-col sm:flex-row md:flex-col h-min items-stretch gap-2 p-4 font-normal overflow-auto">
-          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote.quote}</div>
-          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote.translation}</div>
+          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote?.quote}</div>
+          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote?.translation}</div>
       </div>
   )
 }

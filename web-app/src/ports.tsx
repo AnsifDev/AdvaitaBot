@@ -1,6 +1,6 @@
 'use server'
 
-import { Quote } from "@/components/types"
+import { ChapterIndex, Quote } from "@/components/types"
 import { setTimeout } from "timers/promises"
 
 export async function makePrompt(prompt: string) {
@@ -8,13 +8,49 @@ export async function makePrompt(prompt: string) {
     return `Response for the prompt: "${prompt}"`
 }
 
-export async function fetchQuote(chapter: number, verse: number): Promise<Quote> {
-    await setTimeout(3000)
-    return {
-        chapter: chapter,
-        verse: verse,
-        _id: `${chapter}.${verse}`,
-        quote: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.',
-        translation: 'No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.'
-    }
+import { Filter, MongoClient } from 'mongodb';
+
+export async function getChapterIndex(): Promise<ChapterIndex[]> {
+    const agg = [
+        {
+            '$group': {
+                '_id': '$chapter', 
+                'verses': {
+                    '$count': {}
+                }
+            }
+        }, {
+            '$sort': {
+                '_id': 1
+            }
+        }
+    ];
+
+    const client = await MongoClient.connect(
+        'mongodb+srv://advaitaAdmin:VwYhqxyxEn2qvVjV@advaitacluster.w4rvt.mongodb.net/'
+    );
+    const collection = client.db('Advaita').collection<Quote>('Qoutes');
+    const cursor = collection.aggregate<ChapterIndex>(agg);
+    const result = await cursor.toArray();
+    await client.close();
+    return result;
+}
+
+export async function fetchQuote(chapter: number, verse: number, withCommentary = true): Promise<Quote | null> {
+    const filter = { _id: `${chapter}.${verse}` };
+    const projection = {
+        'commentary': 1, 
+        'translation': 1, 
+        'quote': 1, 
+        'chapter': 1, 
+        'slogan': 1, 
+        '_id': 0
+    };
+    const client = await MongoClient.connect(
+        'mongodb+srv://advaitaAdmin:VwYhqxyxEn2qvVjV@advaitacluster.w4rvt.mongodb.net/'
+    );
+    const coll = client.db('Advaita').collection<Quote>('Qoutes');
+    const result = await coll.findOne<Quote>(filter, { projection });
+    await client.close();
+    return result;
 }

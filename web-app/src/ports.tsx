@@ -39,7 +39,7 @@ export async function getChapterIndex(): Promise<ChapterIndex[]> {
 export async function fetchQuote(chapter: number, verse: number, withCommentary = true): Promise<Quote | null> {
     const filter = { _id: `${chapter}.${verse}` };
     const projection = {
-        'commentary': withCommentary? 1: 0, 
+        'commentary': withCommentary? 1: undefined, 
         'translation': 1, 
         'quote': 1, 
         'chapter': 1, 

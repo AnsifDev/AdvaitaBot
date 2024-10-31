@@ -13,7 +13,7 @@ export function Message({ msg, asPrompt }: { msg: string, asPrompt: boolean }) {
     return (
         <div>
             <div className={`flex ${asPrompt? 'flex-row': 'flex-row-reverse'}`}>
-                <div className="min-w-12 flex-1"/>
+                <div className="min-w-12 lg:min-w-24 flex-1"/>
                 <div className="rounded-lg bg-white/10 px-3 py-2">{msg}</div>
             </div>
         </div>

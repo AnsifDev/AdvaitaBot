@@ -22,8 +22,8 @@ async function Quotes({ chapter, verse }: { chapter: number, verse: number }) {
   const quote = await fetchQuote(chapter, verse, false);
   return (
       <div className="flex flex-col sm:flex-row md:flex-col h-min items-stretch gap-2 p-4 font-normal overflow-auto">
-          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote?.quote}</div>
-          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center">{quote?.translation}</div>
+          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center flex items-center">{quote?.quote}</div>
+          <div className="rounded flex-none sm:flex-1 md:flex-none bg-white/10 py-2 px-4 text-center flex items-center">{quote?.translation}</div>
       </div>
   )
 }
@@ -55,7 +55,7 @@ export default function Page({ params }: PageParams) {
             <Suspense fallback={<QuoteSkel/>}><Quotes chapter={params.chapter} verse={params.verse}/></Suspense>
           </div>
           <div className="md:sticky md:top-0 flex-col">{contentHeaderbar}</div>
-          <ChatClient/>
+          <ChatClient quoteInView={`${params.chapter}.${params.verse}`}/>
       </div>
     </div>
   );

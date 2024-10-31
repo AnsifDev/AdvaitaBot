@@ -3,15 +3,15 @@
 import { useEffect, useRef, useState } from "react"
 import { Message, PromptResponseSkel } from "../server/message"
 import PromptBar from "./prompt_bar"
+import { ChatMessage } from "@/components/types";
 import { makePrompt } from "@/ports";
 
-type Msg = {
-    role: 'user'|'assistant'|'system'
-    content: string
+type ChatClientParams = {
+    quoteInView: string
 }
 
-export default function ChatClient() {
-    const [chats, updateChats] = useState<Array<Msg>>([]);
+export default function ChatClient({ quoteInView }: ChatClientParams) {
+    const [chats, updateChats] = useState<Array<ChatMessage>>([]);
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -21,7 +21,7 @@ export default function ChatClient() {
 
     return (
         <div className="flex flex-col flex-1">
-            <div className="flex-1 flex flex-col gap-2 px-4 items-stretch self-center w-full max-w-[720px]">
+            <div className="flex-1 flex flex-col gap-2 px-4 items-stretch self-center w-full max-w-[960px]">
                 {chats.map((v, i) => <Message key={i} msg={v.content} asPrompt={v.role == 'user'}/>)}
                 <div hidden={!loading}><PromptResponseSkel/></div>
                 <div className="" ref={messagesEndRef}/>
@@ -30,9 +30,12 @@ export default function ChatClient() {
                 <PromptBar disablePrompt={loading} onPrompt={(pr) => {
                     setLoading(true);
                     updateChats([...chats, { role: 'user', content: pr }])
-                    makePrompt(pr).then((resp) => {
+                    makePrompt(pr, chats, quoteInView).then((resp) => {
                         setLoading(false);
                         updateChats([...chats, { role: 'user', content: pr }, { role: 'assistant', content: resp }])
+                    }).catch(() => {
+                        setLoading(false);
+                        updateChats([...chats, { role: 'user', content: pr }, { role: 'assistant', content: 'Error Occured' }])
                     });
                 }}/>
             </div>

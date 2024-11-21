@@ -50,7 +50,7 @@ export default async function Page() {
   return (
     <AppLayout
       sidebarChild={
-        <div className="flex flex-col flex-1 gap-2 px-2 py-2 overflow-auto">
+        <div className="flex flex-col flex-1 gap-2 px-2 py-2 overflow-auto sm:rounded-scrollbar sm:hover:rounded-scrollbar-thumb-neutral-600 sm:rounded-scrollbar-track-neutral-800">
           <div className="px-4 py-24 flex sm:hidden flex-col items-center">
             {/* <div className="sm:text-3xl text-2xl font-bold mx-4 my-16 text-center">Welcome to {process.env.NEXT_PUBLIC_APP_NAME}</div> */}
             <div className="material-symbols-rounded !text-[240px]">web_asset_off</div>

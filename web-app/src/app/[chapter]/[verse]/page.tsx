@@ -44,18 +44,16 @@ function QuoteSkel() {
   return (
     <div className="flex flex-col gap-4 py-4 animate-pulse">
       <div className={`flex flex-col ${chat? 'lg:flex-row': 'md:flex-row'}  h-min items-stretch gap-2 font-normal overflow-auto`}>
-          <div className={`rounded flex-none ${chat? 'lg:flex-1': 'md:flex-1'}  bg-white/10 py-3 px-4 text-center flex items-center justify-center h-24`}></div>
-          <div className={`rounded flex-none ${chat? 'lg:flex-1': 'md:flex-1'}  bg-white/10 py-3 px-4 text-center flex items-center justify-center h-24`}></div>
+          <div className={`rounded flex-none ${chat? 'lg:flex-1': 'md:flex-1'}  dark:bg-white/10 bg-black/10 py-3 px-4 text-center flex items-center justify-center h-24`}></div>
+          <div className={`rounded flex-none ${chat? 'lg:flex-1': 'md:flex-1'}  dark:bg-white/10 bg-black/10 py-3 px-4 text-center flex items-center justify-center h-24`}></div>
       </div>
-      <div className={`flex flex-col gap-2 text-justify italic rounded ${chat? 'bg-white/10 sm:bg-transparent px-4 sm:px-2 py-3 sm:py-2': 'p-2'}`}>
+      <div className={`flex flex-col gap-2 text-justify italic rounded ${chat? 'dark:bg-white/10 bg-black/10 sm:bg-transparent px-4 sm:px-2 py-3 sm:py-2': 'p-2'}`}>
         <div className="not-italic flex flex-row gap-3 items-center">
           <div className="flex-1">Commentary</div>
           <CommentarySanskitSwitch/>
-          {/* <div className={``}></div> */}
           <div className={`${chat? 'sm:hidden': 'hidden'}`}><CommentaryShowButton/></div>
         </div>
-        <div className="h-32 rounded-lg bg-white/10"/>
-        {/* <CommentaryView quote={quote}/> */}
+        <div className="h-32 rounded-lg dark:bg-white/10 bg-black/10"/>
       </div>
     </div>
   )
@@ -69,8 +67,8 @@ export default async function Page(props: PageParams) {
       <VerseHeaderView>
         <DropDown list={verses}/>
         <div className="flex flex-row gap-2">
-          <Link href={`/${params.chapter}/${Number.parseInt(params.verse)-1}`} className="h-9 w-9 rounded hover:bg-white/10 flex items-center justify-center"><span className="material-symbols-rounded">keyboard_arrow_left</span></Link>
-          <Link href={`/${params.chapter}/${Number.parseInt(params.verse)+1}`} className="h-9 w-9 rounded hover:bg-white/10 flex items-center justify-center"><span className="material-symbols-rounded">keyboard_arrow_right</span></Link>
+          <Link href={`/${params.chapter}/${Number.parseInt(params.verse)-1}`} className="h-9 w-9 rounded dark:hover:bg-white/10 hover:bg-black/10 flex items-center justify-center"><span className="material-symbols-rounded">keyboard_arrow_left</span></Link>
+          <Link href={`/${params.chapter}/${Number.parseInt(params.verse)+1}`} className="h-9 w-9 rounded dark:hover:bg-white/10 hover:bg-black/10 flex items-center justify-center"><span className="material-symbols-rounded">keyboard_arrow_right</span></Link>
         </div>
       </VerseHeaderView>
       
@@ -79,8 +77,6 @@ export default async function Page(props: PageParams) {
           <QuoteSection props={props} />
         </Suspense>
       </ErrorBoundary>
-      
-      
     </div>
   )
 }

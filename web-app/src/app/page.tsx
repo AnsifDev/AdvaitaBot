@@ -32,9 +32,9 @@ type AppLayoutParams = {} & SidebarParams & ContentsParams;
 
 function AppLayout({ sidebarChild, contentChild }: AppLayoutParams) {
   return (
-    <div className="h-screen bg-neutral-900 flex flex-col">
-      <div className="flex flex-row text-white h-full">
-        <div className="sm:bg-neutral-800 bg-neutral-900 sm:basis-1/5 sm:max-w-96 flex-1 sm:flex-none min-w-72 flex flex-col"><NavSidebar sidebarChild={sidebarChild}/></div>
+    <div className="h-screen dark:bg-neutral-900 bg-white flex flex-col">
+      <div className="flex flex-row dark:text-white text-black h-full">
+        <div className="dark:sm:bg-neutral-800 sm:bg-neutral-200 dark:bg-neutral-900 bg-white sm:basis-1/5 sm:max-w-96 flex-1 sm:flex-none min-w-72 flex flex-col"><NavSidebar sidebarChild={sidebarChild}/></div>
         <div className="flex-col flex-1 items-center justify-center hidden sm:flex">
           <Contents contentChild={ contentChild } />
         </div>
@@ -50,22 +50,22 @@ export default async function Page() {
   return (
     <AppLayout
       sidebarChild={
-        <div className="flex flex-col flex-1 gap-2 px-2 py-2 overflow-auto sm:rounded-scrollbar sm:hover:rounded-scrollbar-thumb-neutral-600 sm:rounded-scrollbar-track-neutral-800">
+        <div className="flex flex-col flex-1 gap-2 px-2 py-2 overflow-auto sm:rounded-scrollbar dark:sm:hover:rounded-scrollbar-thumb-neutral-600 sm:hover:rounded-scrollbar-thumb-neutral-400 dark:sm:rounded-scrollbar-track-neutral-800 sm:rounded-scrollbar-track-neutral-200">
           <div className="px-4 py-24 flex sm:hidden flex-col items-center">
             {/* <div className="sm:text-3xl text-2xl font-bold mx-4 my-16 text-center">Welcome to {process.env.NEXT_PUBLIC_APP_NAME}</div> */}
             <div className="material-symbols-rounded !text-[240px]">web_asset_off</div>
             <div className="text-3xl font-extrabold mt-8 mb-2 mx-4">No Chapter Selected</div>
-            <div className=" text-white/70">Select a chapter to get started</div>
+            <div className=" dark:text-white/70 text-black/70">Select a chapter to get started</div>
           </div>
-          {chapters.map((s, i) => (<Link href={`/${i+1}/1`} key={i} className="px-4 py-2 rounded-md bg-white/5 hover:bg-white/15 sm:bg-transparent sm:hover:bg-white/10 text-center sm:text-start">{s}</Link>))}
+          {chapters.map((s, i) => (<Link href={`/${i+1}/1`} key={i} className="px-4 py-2 rounded-md dark:bg-white/5 bg-black/5 dark:hover:bg-white/15 hover:bg-black/15 sm:bg-transparent dark:sm:hover:bg-white/10 sm:hover:bg-black/10 text-center sm:text-start">{s}</Link>))}
         </div>
       }
       contentChild={
         <div className="contents">
           {/* <div className="sm:text-3xl text-2xl font-extrabold mx-4 my-16 text-center">Welcome to {process.env.NEXT_PUBLIC_APP_NAME}</div> */}
-          <div className="material-symbols-rounded !text-[288px]">web_asset_off</div>
+          <div className="material-symbols-rounded !text-[288px] text-black/80 dark:text-white">web_asset_off</div>
           <div className="text-3xl font-extrabold mt-8 mb-2 mx-4">No Chapter Selected</div>
-          <div className=" text-white/70">Select a chapter to get started</div>
+          <div className=" dark:text-white/70 text-black/70">Select a chapter to get started</div>
         </div>
       }
     />

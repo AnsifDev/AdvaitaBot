@@ -26,7 +26,7 @@ export default function ChatClient({ quoteInView }: ChatClientParams) {
                 <div hidden={!loading}><PromptResponseSkel/></div>
                 <div className="" ref={messagesEndRef}/>
             </div>
-            <div className="sm:sticky z-20 fixed left-0 right-0 sm:left-auto sm:right-auto bottom-0 py-2 px-3 bg-neutral-900 self-stretch">
+            <div className="sm:sticky z-20 fixed left-0 right-0 sm:left-auto sm:right-auto bottom-0 py-2 px-3 dark:bg-neutral-900 bg-white self-stretch">
                 <PromptBar disablePrompt={loading} onPrompt={(pr) => {
                     setLoading(true);
                     updateChats([...chats, { role: 'user', content: pr }])

@@ -9,15 +9,15 @@ export type Verse = {
     verse_number: number,
     speaker: string,
     verse: string,
-    commentary: string,
+    commentary?: string,
     verse_en: string,
-    commentary_en: string
+    commentary_en?: string
 }
 
-// export type Chapter = {
-//     _id: string,
-//     chapter_number: number,
-//     title: string,
-//     title_en: string,
-//     introduction?: string
-// }
+export type Chapter = {
+    chapter_number: number,
+    title: string,
+    title_en: string,
+    verse_count: number,
+    introduction?: string
+}

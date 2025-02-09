@@ -1,4 +1,6 @@
-export const chapters = [
+import { Chapter } from "./types";
+
+export const chapters: Chapter[] = [
     {
         chapter_number: 1,
         title: "अर्जुनविषादयोगः",

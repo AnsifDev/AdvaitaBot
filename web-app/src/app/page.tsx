@@ -34,7 +34,7 @@ function AppLayout({ sidebarChild, contentChild }: AppLayoutParams) {
   return (
     <div className="h-screen bg-neutral-900 flex flex-col">
       <div className="flex flex-row text-white h-full">
-        <div className="sm:bg-neutral-800 bg-neutral-900 sm:basis-1/4 sm:max-w-96 flex-1 sm:flex-none min-w-72 flex flex-col"><NavSidebar sidebarChild={sidebarChild}/></div>
+        <div className="sm:bg-neutral-800 bg-neutral-900 sm:basis-1/5 sm:max-w-96 flex-1 sm:flex-none min-w-72 flex flex-col"><NavSidebar sidebarChild={sidebarChild}/></div>
         <div className="flex-col flex-1 items-center justify-center hidden sm:flex">
           <Contents contentChild={ contentChild } />
         </div>

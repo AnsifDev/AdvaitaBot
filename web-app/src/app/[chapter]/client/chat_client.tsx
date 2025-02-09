@@ -21,12 +21,12 @@ export default function ChatClient({ quoteInView }: ChatClientParams) {
 
     return (
         <div className="flex flex-col flex-1 min-h-64">
-            <div className="flex-1 flex flex-col gap-2 px-4 items-stretch self-center w-full max-w-[960px]">
+            <div className="flex-1 flex flex-col gap-2 px-4 items-stretch self-center w-full max-w-[960px] mb-16 sm:mb-0">
                 {chats.map((v, i) => <Message key={i} msg={v.content} asPrompt={v.role == 'user'}/>)}
                 <div hidden={!loading}><PromptResponseSkel/></div>
                 <div className="" ref={messagesEndRef}/>
             </div>
-            <div className="sticky bottom-0 py-2 px-3 bg-neutral-900 self-stretch">
+            <div className="sm:sticky z-20 fixed left-0 right-0 sm:left-auto sm:right-auto bottom-0 py-2 px-3 bg-neutral-900 self-stretch">
                 <PromptBar disablePrompt={loading} onPrompt={(pr) => {
                     setLoading(true);
                     updateChats([...chats, { role: 'user', content: pr }])
